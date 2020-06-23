@@ -1,0 +1,29 @@
+
+set S := InFavor OutFavor ;
+    
+set GrA :=
+InFavor NoAd
+InFavor Ad
+OutFavor NoResearch
+OutFavor Research
+;
+
+param c :=
+InFavor NoAd -6
+InFavor Ad -4
+OutFavor NoResearch 3
+OutFavor Research 5
+;
+
+param p :=
+InFavor NoAd InFavor 0.5
+InFavor NoAd OutFavor 0.5
+InFavor Ad InFavor 0.8
+InFavor Ad OutFavor 0.2
+OutFavor NoResearch InFavor 0.4
+OutFavor NoResearch OutFavor 0.6
+OutFavor Research InFavor 0.7
+OutFavor Research OutFavor 0.3
+;
+
+param disc := 0.9 ;
