@@ -18,7 +18,7 @@ def A_init(model, state):
 model.A = pyo.Set(model.S, initialize=A_init) # action sets
 
 # Parameters
-model.c = pyo.Param(model.GrA) # one-step costs
+model.r = pyo.Param(model.GrA) # one-step rewards
 model.p = pyo.Param(model.GrA, model.S, default=0) # transition probabilities
 model.disc = pyo.Param(within=pyo.UnitInterval) # discount factor
 
@@ -27,8 +27,8 @@ model.x = pyo.Var(model.GrA, domain=pyo.NonNegativeReals) # occupancy measure
 
 # Objective
 def OBJ_rule(model):
-    return pyo.summation(model.c, model.x)
-model.OBJ = pyo.Objective(rule=OBJ_rule, sense=pyo.minimize)
+    return pyo.summation(model.r, model.x)
+model.OBJ = pyo.Objective(rule=OBJ_rule, sense=pyo.maximize)
 
 # Constraints
 def CON_rule(model, state):

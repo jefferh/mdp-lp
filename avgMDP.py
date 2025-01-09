@@ -1,5 +1,5 @@
 
-# LP Formulation of Average-Cost MDP
+# LP Formulation of Average-Reward MDP
 
 import pyomo.environ as pyo
 
@@ -18,7 +18,7 @@ def A_init(model, state):
 model.A = pyo.Set(model.S, initialize=A_init) # action sets
 
 # Parameters
-model.c = pyo.Param(model.GrA) # one-step costs
+model.r = pyo.Param(model.GrA) # one-step rewards
 model.p = pyo.Param(model.GrA, model.S, default=0) # transition probabilities
 model.alpha = pyo.Param(model.S) # initial distribution
 
@@ -28,8 +28,8 @@ model.y = pyo.Var(model.GrA, domain=pyo.NonNegativeReals)
 
 # Objective
 def OBJ_rule(model):
-    return pyo.summation(model.c, model.x)
-model.OBJ = pyo.Objective(rule=OBJ_rule, sense=pyo.minimize)
+    return pyo.summation(model.r, model.x)
+model.OBJ = pyo.Objective(rule=OBJ_rule, sense=pyo.maximize)
 
 # Constraints
 def x_rule(model, state):
